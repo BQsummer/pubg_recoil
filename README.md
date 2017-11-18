@@ -13,3 +13,4 @@
 10. 怎么运行?可以打成fatjar,把两个dll放到jar的同层,**用管理员权限**打开cmd,java -jar xxx.jar
 11. dd74000x64.64.dll是dd虚拟鼠标的,jacob-1.18-x64.dll是语音的
 12. 默认准镜的灵敏度都是50,也可以修改代码中的参数
+![demo](ab.gif)
