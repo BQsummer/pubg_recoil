@@ -1,0 +1,8 @@
+switch to 4x
+switch to basicp
+time = 97, move = 22
+time = 100, move = 23ttime = 101, move = 23ttime = 98, move = 23ttime = 99, move = 23
+time = 96, move = 22
+time = 102, move = 24ttime = 103, move = 24titime = 99, move = 23titime = 97, move = 22time = 99, move = 23
+swiswitch to 4timtime = 104, move = timetime = 100, move =time time = 104, move time =time = 96, move time =time = 99, move time =time = 97, move time =time = 100, movetime = time = 99, movetime = time = 98, move time =time = 102, movetime = time = 100, movtime = 1time = 95, movetime = time = 101, movtime =
+time = 103, movtime = 1time = 102, movtime = 103, move = 68
