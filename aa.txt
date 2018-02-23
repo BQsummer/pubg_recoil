@@ -1,0 +1,7 @@
+time = 98, move = 23
+time = 103, move = 24
+time = 96, move = 22
+time = 96, move = 22
+time = 100, move = 23
+switch to 4x
+switch to basicp
