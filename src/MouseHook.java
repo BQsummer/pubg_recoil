@@ -10,17 +10,16 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinDef.LRESULT;
 import com.sun.jna.platform.win32.WinDef.WPARAM;
 import com.sun.jna.platform.win32.WinUser.HHOOK;
-import com.sun.jna.platform.win32.WinUser.HOOKPROC;
 import com.sun.jna.platform.win32.WinUser.LowLevelKeyboardProc;
 import com.sun.jna.platform.win32.WinUser.MSG;
+import constant.KeyboardConstants;
+import jna.DD;
+import jna.LowLevelMouseProc;
+import jna.MouseHookStruct;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-
-interface LowLevelMouseProc extends HOOKPROC {
-    LRESULT callback(int nCode, WPARAM wParam, MouseHookStruct lParam);
-}
 
 public final class MouseHook {
 
@@ -36,16 +35,6 @@ public final class MouseHook {
     public boolean threadFinish = true;
     public boolean isHooked = false;
     public boolean isHooked2 = false;
-    public static final int WM_MOUSEMOVE = 512;
-    public static final int WM_LBUTTONDOWN = 513;
-    public static final int WM_LBUTTONUP = 514;
-    public static final int WM_RBUTTONDOWN = 516;
-    public static final int WM_RBUTTONUP = 517;
-    public static final int WM_MBUTTONDOWN = 519;
-    public static final int WM_MBUTTONUP = 520;
-    public static final int WM_MOUSEWHEEL = 522;
-    public static final int WM_LBUTTONDBLCLK = 515;
-    public static final int WM_KEYDOWN = 256;
 
     /**
      * 左键是否被按下
@@ -90,11 +79,11 @@ public final class MouseHook {
      */
     static int mode = 0;
 
-    static double[][] akm = {{23.7, 23.7, 23.7, 23.7, 23.7, 23.7, 23.7, 23.7, 23.7, 23.7, 23.7, 28, 28, 28, 28, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7, 29.7},
+    static double[][] akm = {{},
             {66.7, 66.7, 66.7, 66.7, 66.7, 66.7, 66.7, 66.7, 66.7, 66.7, 66.7, 123.3, 123.3, 123.3, 123.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3, 93.3},
             {100}};
 
-    static double[][] m4 = {{26.7, 26.7, 26.7, 26.7, 26.7, 26.7, 37, 37, 37, 37, 37, 31, 31, 31, 31, 31, 32, 32, 32, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35},
+    static double[][] m4 = {{},
             {86.7, 86.7, 86.7, 86.7, 86.7, 86.7, 86.7, 150, 150, 150, 150, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7, 96.7},
             {86}};
 
@@ -269,18 +258,18 @@ public final class MouseHook {
             public LRESULT callback(int nCode, WPARAM wParam, MouseHookStruct info) {
                 if (nCode >= 0) {
                     switch (wParam.intValue()) {
-                        case MouseHook.WM_LBUTTONDOWN: {
+                        case KeyboardConstants.WM_LBUTTONDOWN: {
                             isDown = true;
                         }
-                        case MouseHook.WM_RBUTTONDOWN: // Right click
+                        case KeyboardConstants.WM_RBUTTONDOWN: // Right click
                             break;
-                        case MouseHook.WM_MBUTTONDOWN: {
+                        case KeyboardConstants.WM_MBUTTONDOWN: {
                         }
-                        case MouseHook.WM_LBUTTONUP:
+                        case KeyboardConstants.WM_LBUTTONUP:
                             break;
-                        case MouseHook.WM_MOUSEMOVE:
+                        case KeyboardConstants.WM_MOUSEMOVE:
                             break;
-                        case MouseHook.WM_MOUSEWHEEL: // Scrolling by wheel
+                        case KeyboardConstants.WM_MOUSEWHEEL: // Scrolling by wheel
                             break;
                         default:
                             break;
@@ -307,17 +296,17 @@ public final class MouseHook {
             public LRESULT callback(int nCode, WPARAM wParam, MouseHookStruct info) {
                 if (nCode >= 0) {
                     switch (wParam.intValue()) {
-                        case MouseHook.WM_LBUTTONDOWN:
+                        case KeyboardConstants.WM_LBUTTONDOWN:
                             break;
-                        case MouseHook.WM_RBUTTONDOWN: // Right click
+                        case KeyboardConstants.WM_RBUTTONDOWN: // Right click
                             break;
-                        case MouseHook.WM_MBUTTONDOWN: // Middle click
+                        case KeyboardConstants.WM_MBUTTONDOWN: // Middle click
                             break;
-                        case MouseHook.WM_LBUTTONUP:
+                        case KeyboardConstants.WM_LBUTTONUP:
                             isDown = false;
-                        case MouseHook.WM_MOUSEMOVE:
+                        case KeyboardConstants.WM_MOUSEMOVE:
                             break;
-                        case MouseHook.WM_MOUSEWHEEL: // Scrolling by wheel
+                        case KeyboardConstants.WM_MOUSEWHEEL: // Scrolling by wheel
                             break;
                         default:
                             break;
@@ -336,44 +325,8 @@ public final class MouseHook {
     /**
      * 左键按下的鼠标移动
      */
-    public static class MouseMoveDown extends Thread {
-        @Override
-        public void run() {
-            try {
-                for (int i = 0; i > -1; ) {
-                    Thread.sleep(1);
-                    if (isDown && start) {
-                        double[] para = recoil_value(weapon, shoot_duration);
-                        int move = new Double(para[1]).intValue();
-                        int time = new Double(para[0]).intValue();
-                        System.out.println("time = " + time + ", move = " + move);
-                        DD.INSTANCE.DD_movR(0, move);
-                        Thread.sleep(time);
-                        shoot_duration = shoot_duration + para[0];
-                    } else {
-                        shoot_duration = 0;
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-    }
 
-    public static class Say extends Thread {
-        @Override
-        public void run() {
-            if (sapiEnable) {
-                try {
-                    sap.setProperty("Volume", new Variant(100));
-                    sap.setProperty("Rate", new Variant(2));
-                    Dispatch.call(sapo, "Speak", new Variant(sayContent));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+
 
     /**
      * 鼠标按下的回调函数
@@ -386,7 +339,7 @@ public final class MouseHook {
             public LRESULT callback(int nCode, WPARAM wParam, User32.KBDLLHOOKSTRUCT lParam) {
                 if (nCode >= 0) {
                     switch (wParam.intValue()) {
-                        case MouseHook.WM_KEYDOWN: {
+                        case KeyboardConstants.WM_KEYDOWN: {
                             if (lParam.vkCode == 0x56) {
                                 if (weapon == 0) {
                                     System.out.println("switch to 1");

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jacob.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jna-platform.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jna.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
