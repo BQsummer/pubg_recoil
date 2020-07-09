@@ -24,10 +24,14 @@ public class AppProperties {
      */
     private int sapiVolumn;
 
+    private int warningSwitch = 0;
+
     /**
      * 提示音语速
      */
     private int sapiRate;
+
+    private int warningInterval = 10;
 
     private AppProperties(){};
 
@@ -50,23 +54,22 @@ public class AppProperties {
         return sensitivityTarget;
     }
 
-    public void setSensitivityTarget(int sensitivityTarget) {
-        this.sensitivityTarget = sensitivityTarget;
-    }
 
     public int getSapiVolumn() {
         return sapiVolumn;
     }
 
-    public void setSapiVolumn(int sapiVolumn) {
-        this.sapiVolumn = sapiVolumn;
-    }
 
     public int getSapiRate() {
         return sapiRate;
     }
 
-    public void setSapiRate(int sapiRate) {
-        this.sapiRate = sapiRate;
+
+    public int getWarningSwitch() {
+        return warningSwitch;
+    }
+
+    public int getWarningInterval() {
+        return warningInterval;
     }
 }

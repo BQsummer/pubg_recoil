@@ -11,7 +11,7 @@ public class Gun {
 
     private double interval;
 
-    private double[] recoil;
+    private Double[] recoil;
 
     public Gun() {}
 
@@ -24,7 +24,7 @@ public class Gun {
         this.interval = interval;
     }
 
-    public Gun(String name, double[] recoil) {
+    public Gun(String name, Double[] recoil) {
         this.name = name;
         this.recoil = recoil;
     }
@@ -43,7 +43,7 @@ public class Gun {
         return this;
     }
 
-    public Gun recoil(double[] recoil) {
+    public Gun recoil(Double[] recoil) {
         this.recoil = recoil;
         return this;
     }
@@ -68,11 +68,11 @@ public class Gun {
         this.interval = interval;
     }
 
-    public double[] getRecoil() {
+    public Double[] getRecoil() {
         return recoil;
     }
 
-    public void setRecoil(double[] recoil) {
+    public void setRecoil(Double[] recoil) {
         this.recoil = recoil;
     }
 }

@@ -3,6 +3,7 @@ package service;
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;
 import com.jacob.com.Variant;
+import property.AppProperties;
 
 /**
  * @description:
@@ -40,20 +41,26 @@ public class SapiService {
     }
 
     public void say(String content) {
-
+        new SapiThread(content).start();
     }
 
     public class SapiThread extends Thread {
+
+        public SapiThread(String sayContent) {
+            this.sayContent = sayContent;
+        }
+
+        private String sayContent;
+
         @Override
         public void run() {
-                try {
-                    sap.setProperty("Volume", new Variant(100));
-                    sap.setProperty("Rate", new Variant(2));
-                    Dispatch.call(sapo, "Speak", new Variant(sayContent));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
+            try {
+                sap.setProperty("Volume", AppProperties.getInstance().getSapiVolumn());
+                sap.setProperty("Rate", AppProperties.getInstance().getSapiRate());
+                Dispatch.call(sapo, "Speak", new Variant(sayContent));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
