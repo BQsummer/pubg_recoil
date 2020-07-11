@@ -1,4 +1,4 @@
-package jna;
+package com.bqsummer.jna;
 
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinUser.HOOKPROC;

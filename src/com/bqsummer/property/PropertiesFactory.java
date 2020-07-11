@@ -1,14 +1,13 @@
-package property;
+package com.bqsummer.property;
 
-import collection.Pair;
-import constant.Constants;
-import service.GunFactory;
+import com.bqsummer.collection.Pair;
+import com.bqsummer.constant.Constants;
+import com.bqsummer.service.GunService;
 
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -26,7 +25,7 @@ public class PropertiesFactory {
 
     private static AppProperties appProperties;
 
-    private static GunFactory gunFactory;
+    private static GunService gunService;
 
     private PropertiesFactory(){};
 
@@ -43,7 +42,7 @@ public class PropertiesFactory {
 
     private static PropertiesFactory init() {
         appProperties = AppProperties.getInstance();
-        gunFactory = GunFactory.getInstance();
+        gunService = GunService.getInstance();
         readFile();
         return new PropertiesFactory();
     }
@@ -68,7 +67,7 @@ public class PropertiesFactory {
 
     private static Pair<String, String> lineToPair(String line) {
         if (line.contains(Constants.EQUAL_SYMBOL)) {
-            String[] splited = line.split(Constants.EMPTY_STR);
+            String[] splited = line.split(Constants.EQUAL_SYMBOL);
             return new Pair<>(splited[0], splited[1]);
         } else {
             return new Pair<>(line, Constants.EMPTY_STR);
@@ -79,12 +78,12 @@ public class PropertiesFactory {
         String[] gunInfo = propertyLine.getKey().split("\\.");
         String gunName = gunInfo[1];
         String gunPropertyName = gunInfo[2];
-        if (Constants.RECOIL.equals(gunPropertyName)) {
-            gunFactory.buildGun(gunName, Double.parseDouble(propertyLine.getValue()));
+        if (Constants.INTERVAL.equals(gunPropertyName)) {
+            gunService.buildGun(gunName, Double.parseDouble(propertyLine.getValue()));
         } else if(Constants.RECOIL.equals(gunPropertyName)) {
             String[] splitedRecoil = propertyLine.getValue().split(Constants.SPLIT_SYMBOL);
             Double[] recoils = Arrays.stream(splitedRecoil).map(String::trim).map(Double::parseDouble).toArray(Double[]::new);
-            gunFactory.buildGun(gunName, recoils);
+            gunService.buildGun(gunName, recoils);
         } else {
             throw new RuntimeException("gun property invalid. gunPropertyName = " + gunPropertyName);
         }
@@ -98,7 +97,7 @@ public class PropertiesFactory {
 
     public static String buildValueName(String valueName) {
         if (valueName.contains(Constants.DOT_SYMBOL)) {
-            String[] splitedName = valueName.split(Constants.DOT_SYMBOL);
+            String[] splitedName = valueName.split(Constants.DOT_SYMBOL_EXP);
             StringBuilder finalNameBuilder = new StringBuilder();
             for (int i = 0; i < splitedName.length; i++) {
                 if (i == 0) {
@@ -119,7 +118,18 @@ public class PropertiesFactory {
             try {
                 Field field = clazz.getDeclaredField(fieldName);
                 field.setAccessible(true);
-                field.set(object, fieldValue);
+
+                final Class<?> type = field.getType();
+                Object typedValue = null;
+                if(int.class.isAssignableFrom(type)) {
+                    typedValue = Integer.parseInt(fieldValue.toString());
+                } else if(double.class.isAssignableFrom(type)){
+                    typedValue = Double.parseDouble(fieldValue.toString());
+                } else if(String.class.isAssignableFrom(type)) {
+                    typedValue = fieldValue.toString();
+                }
+                field.set(object, typedValue);
+                System.out.println("set field success, field = " + fieldName + ", value = " + fieldValue);
                 return true;
             } catch (NoSuchFieldException e) {
                 clazz = clazz.getSuperclass();

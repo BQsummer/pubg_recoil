@@ -1,9 +1,9 @@
-package service;
+package com.bqsummer.service;
 
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;
 import com.jacob.com.Variant;
-import property.AppProperties;
+import com.bqsummer.property.AppProperties;
 
 /**
  * @description:
@@ -55,8 +55,8 @@ public class SapiService {
         @Override
         public void run() {
             try {
-                sap.setProperty("Volume", AppProperties.getInstance().getSapiVolumn());
-                sap.setProperty("Rate", AppProperties.getInstance().getSapiRate());
+                sap.setProperty("Volume", new Variant(AppProperties.getInstance().getSapiVolume()));
+                sap.setProperty("Rate", new Variant(AppProperties.getInstance().getSapiRate()));
                 Dispatch.call(sapo, "Speak", new Variant(sayContent));
             } catch (Exception e) {
                 e.printStackTrace();

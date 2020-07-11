@@ -1,4 +1,4 @@
-package constant;
+package com.bqsummer.constant;
 
 /**
  * @description:

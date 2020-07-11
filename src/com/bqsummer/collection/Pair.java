@@ -1,4 +1,4 @@
-package collection;
+package com.bqsummer.collection;
 
 public class Pair<K, V> {
 

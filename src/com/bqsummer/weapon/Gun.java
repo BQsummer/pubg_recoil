@@ -1,4 +1,4 @@
-package weapon;
+package com.bqsummer.weapon;
 
 /**
  * @description:

@@ -1,4 +1,4 @@
-package jna;
+package com.bqsummer.jna;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;

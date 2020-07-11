@@ -1,9 +1,4 @@
-package property;
-
-import weapon.Gun;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.bqsummer.property;
 
 /**
  * @description:
@@ -22,16 +17,20 @@ public class AppProperties {
     /**
      * 提示音音量
      */
-    private int sapiVolumn;
-
-    private int warningSwitch = 0;
+    private int sapiVolume;
 
     /**
      * 提示音语速
      */
     private int sapiRate;
 
+    private int warningSwitch = 0;
+
     private int warningInterval = 10;
+
+    private double recoilIntervalRatio = 0.99;
+
+    private double recoilRandomSeed = 0.1;
 
     private AppProperties(){};
 
@@ -54,16 +53,13 @@ public class AppProperties {
         return sensitivityTarget;
     }
 
-
-    public int getSapiVolumn() {
-        return sapiVolumn;
+    public int getSapiVolume() {
+        return sapiVolume;
     }
-
 
     public int getSapiRate() {
         return sapiRate;
     }
-
 
     public int getWarningSwitch() {
         return warningSwitch;
@@ -71,5 +67,13 @@ public class AppProperties {
 
     public int getWarningInterval() {
         return warningInterval;
+    }
+
+    public double getRecoilIntervalRatio() {
+        return recoilIntervalRatio;
+    }
+
+    public double getRecoilRandomSeed() {
+        return recoilRandomSeed;
     }
 }
