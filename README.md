@@ -9,8 +9,10 @@
 application.properties文件:  
 
     gun.xxx.recoil为后坐力  
-    
     gun.xxx.interval为开枪间隔  
 
 默认的武器后坐力参数已过期,需要自己调整
 可参考 https://github.com/BQsummer/pubg-img 图像识别计算枪支后坐力
+
+# 免责
+使用了DD虚拟键盘虚拟鼠标, 不确定是否安全
