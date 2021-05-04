@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: com.bqsummer.Application
+Class-Path: jacob.jar jna-5.8.0.jar jna-platform-5.8.0.jar application.p
+ roperties
+
